@@ -1,12 +1,12 @@
 module GS where
 
--- Excercise 1.9
+-- Exercise 1.9
 mxmInt :: [Int] -> Int
 mxmInt []     = error "empty list"
 mxmInt [x]    = x
 mxmInt (x:xs) = max x (mxmInt xs)
 
--- Excercise 1.10
+-- Exercise 1.10
 removeFst :: Eq a => a -> [a] -> [a]
 removeFst m []     = error "empty list"
 removeFst m [x]    | x == m = []
@@ -14,7 +14,7 @@ removeFst m [x]    | x == m = []
 removeFst m (x:xs) | x == m = xs
                    | otherwise = x : (removeFst m xs)
 
--- Excercise 1.13
+-- Exercise 1.13
 count :: Char -> String -> Int
 count c []     = 0
 count c [x]    | c == x = 1
@@ -22,7 +22,7 @@ count c [x]    | c == x = 1
 count c (x:xs) | c == x = 1 + (count c xs)
                | otherwise = (count c xs)
 
--- Excercise 1.14
+-- Exercise 1.14
 blowup :: String -> String
 blowup s = let
              rptChar :: Char -> Int -> String
@@ -37,7 +37,7 @@ blowup s = let
            in
              blwpHlpr s 1
 
--- Excercise 1.15
+-- Exercise 1.15
 srtString :: [String] -> [String]
 srtString [] = []
 srtString [x] = [x]
@@ -49,7 +49,7 @@ srtString xs = let
                in
                  (mnmStr xs) : srtString (removeFst (mnmStr xs) xs)
 
--- Excercise 1.17
+-- Exercise 1.17
 prefix :: String -> String -> Bool
 prefix [] ys = True
 prefix (x:xs) [] = False
@@ -60,11 +60,11 @@ substring [] ys = True
 substring (x:xs) [] = False
 substring xs (y:ys) = (prefix xs (y:ys)) || (substring xs ys)
 
--- Excercise 1.20
+-- Exercise 1.20
 lengths :: [[a]] -> [Int]
 lengths xs = map length xs
 
--- Excercise 1.21
+-- Exercise 1.21
 sumLengths :: [[a]] -> Int
 sumLengths xs = sum (lengths xs)
 
