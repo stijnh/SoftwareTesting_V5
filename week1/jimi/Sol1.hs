@@ -22,7 +22,7 @@ count c (x : xs)
   | c == x = 1 + (count c xs)
   | otherwise = (count c xs)
 
--- Exercise 1.14
+-- Exercise 1.14 a
 rptChar :: Char -> Int -> String
 rptChar c n
   | n < 0 = error "n should be a positive integer"
@@ -35,6 +35,12 @@ blwpHlpr (x : xs) n = (rptChar x n) ++ (blwpHlpr xs (n + 1))
 
 blowup :: String -> String
 blowup s = blwpHlpr s 1
+
+--Exercise 1.14 b
+blowup :: [a] -> [a]
+blowup xs = blowup' xs 1
+    where blowup' [] _ = []
+          blowup' (x:xs) n = take n (repeat x) ++ blowup' xs (n+1)
 
 -- Exercise 1.15
 srtString :: [String] -> [String]
