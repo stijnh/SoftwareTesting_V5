@@ -1,68 +1,87 @@
-module GS where
+module GS 
 
--- Exercise 1.9
-mxmInt :: [Int] -> Int
-mxmInt [] = error "empty list"
-mxmInt [x] = x
-mxmInt (x : xs) = max x (mxmInt xs)
+where 
 
--- Exercise 1.10
-removeFst :: Eq a => a -> [a] -> [a]
-removeFst m [] = error "empty list"
-removeFst m [x]
-  | x == m = []
-  | otherwise = [x]
-removeFst m (x : xs)
-  | x == m = xs
-  | otherwise = x : (removeFst m xs)
+divides :: Integer -> Integer -> Bool
+divides d n = rem n d == 0
 
--- Exercise 1.13
-count :: Char -> String -> Int
-count c [] = 0
-count c (x : xs)
-  | c == x = 1 + (count c xs)
-  | otherwise = (count c xs)
+ld :: Integer -> Integer 
+ld n = ldf 2 n 
 
--- Exercise 1.14
-rptChar :: Char -> Int -> String
-rptChar c n
-  | n < 0 = error "n should be a positive integer"
-  | n == 0 = []
-  | otherwise = c : (rptChar c (n - 1))
+ldf :: Integer -> Integer -> Integer 
+ldf k n | divides k n = k 
+        | k^2 >  n    = n 
+        | otherwise   = ldf (k+1) n
 
-blwpHlpr :: String -> Int -> String
-blwpHlpr [] n = []
-blwpHlpr (x : xs) n = (rptChar x n) ++ (blwpHlpr xs (n + 1))
+prime0 :: Integer -> Bool
+prime0 n | n < 1     = error "not a positive integer"
+         | n == 1    = False 
+         | otherwise = ld n == n
 
-blowup :: String -> String
-blowup s = blwpHlpr s 1
+mnmInt :: [Int] -> Int
+mnmInt [] = error "empty list" 
+mnmInt [x] = x
+mnmInt (x:xs) = min x (mnmInt xs)
 
--- Exercise 1.15
-mnmStr :: [String] -> String
-mnmStr [] = error "empty list"
-mnmStr [x] = x
-mnmStr (x : xs) = min x (mnmStr xs)
+min' :: Int -> Int -> Int 
+min' x y | x <= y    = x
+         | otherwise = y 
 
-srtString :: [String] -> [String]
-srtString [] = []
-srtString [x] = [x]
-srtString xs = (mnmStr xs) : srtString (removeFst (mnmStr xs) xs)
+average :: [Int] -> Rational
+average [] = error "empty list" 
+average xs = toRational (sum xs) / toRational (length xs)
 
--- Exercise 1.17
+sum' :: [Int] -> Int
+sum' [] = 0 
+sum' (x:xs) = x + sum' xs
+
+length' :: [a] -> Int
+length' [] = 0 
+length' (x:xs) = 1 + length' xs
+
 prefix :: String -> String -> Bool
 prefix [] ys = True
-prefix (x : xs) [] = False
-prefix (x : xs) (y : ys) = (x == y) && (prefix xs ys)
+prefix (x:xs) [] = False
+prefix (x:xs) (y:ys) = (x==y) && prefix xs ys 
 
-substring :: String -> String -> Bool
-substring (x : xs) [] = False
-substring xs (y : ys) = (prefix xs (y : ys)) || (substring xs ys)
+factors :: Integer -> [Integer]
+factors n | n < 1     = error "argument not positive"
+          | n == 1    = []
+          | otherwise = p : factors (div n p) where p = ld n
 
--- Exercise 1.20
-lengths :: [[a]] -> [Int]
-lengths xs = map length xs
+primes0 :: [Integer]
+primes0 = filter prime0 [2..]    
 
--- Exercise 1.21
-sumLengths :: [[a]] -> Int
-sumLengths xs = sum (lengths xs)
+ldp :: Integer -> Integer
+ldp n = ldpf primes1 n
+
+ldpf :: [Integer] -> Integer -> Integer
+ldpf (p:ps) n | rem n p == 0 = p 
+              | p^2 > n      = n
+              | otherwise    = ldpf ps n
+
+primes1 :: [Integer]
+primes1 = 2 : filter prime [3..]
+
+prime :: Integer -> Bool
+prime n | n < 1     = error "not a positive integer"
+        | n == 1    = False 
+        | otherwise = ldp n == n
+
+a = 3
+b = 4 
+f :: Integer -> Integer -> Integer
+f x y = x^2 + y^2
+
+g :: Integer -> Integer 
+g 0 = 0
+g x = 2 * g (x-1) 
+
+h1 :: Integer -> Integer 
+h1 0 = 0
+h1 x = 2 * (h1 x) 
+
+h2 :: Integer -> Integer 
+h2 0 = 0
+h2 x = h2 (x+1) 
 
