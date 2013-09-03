@@ -7,13 +7,13 @@ Assignments for the Software Testing course of the MSc Software Engineering prog
     <th>Name</th><th>Student ID</th>
   </tr>
   <tr>
-    <td>Peter Bond</td><td>?</td>
+    <td>Peter Bond</td><td>6059309</td>
   </tr>
   <tr>
     <td>Santiago Carillo</td><td>10629475</td>
   </tr>
   <tr>
-    <td>Xander Horjus</td><td>?</td>
+    <td>Xander Horjus</td><td>6033164</td>
   </tr>
   <tr>
     <td>Alex Thirlwall</td><td>?</td>
