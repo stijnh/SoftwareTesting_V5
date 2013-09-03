@@ -40,11 +40,11 @@ check20_7 = logEquiv3 (\ p q r -> p || q ==> r) (\ p q r -> (p ==> r) && (q ==> 
 
 -- Exercise 2.51
 unique :: (a -> Bool) -> [a] -> Bool
-unique p xs = (length . filter p) xs == 1
+unique p = (== 1) . length . filter p
 
 -- Exercise 2.52
 parity :: [Bool] -> Bool
-parity xs = (rem . length . filter (==True)) xs 2 == 0
+parity = (\ x -> rem x 2 == 0) . length . filter (== True)
 
 -- Exercise 2.53
 evenNR :: (a -> Bool) -> [a] -> Bool
